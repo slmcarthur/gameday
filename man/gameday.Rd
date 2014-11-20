@@ -3,11 +3,12 @@
 \name{gameday}
 \alias{gameday}
 \alias{gameday-package}
-\title{My first R package: gameday}
+\title{gameday}
 \description{
-A one-liner summary of what this package is for.
+An RStudio interface for extracting NHL data from live.nhl.com
 }
 \details{
-Then we can add a larger paragraph that can span several lines
+This package allows users to determine whether or not their NHL team
+plays today or any other day of their choosing.
 }
 

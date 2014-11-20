@@ -1,18 +1,15 @@
-######### NEED TO CHANGE THIS
-
-#' NHL final scores for a particular date
+#' What was the final score?
 #'
-#' This function returns a data frame with all scores on the specified date.
+#' This function returns a data.frame with all scores from NHL games played on a certain date.
 #'
-#' Allows the user to look up NHL final scores without going to the internet browser.
+#' The user can look up NHL final scores for whichever day they please, without starting up a web browser.
 #'
-#' @param date The specified date for which to look up scores for.
-#' @return A data frame with columns for the home and away team names, and for the home and away team scores.
-#' @note If the date is in the future, the columns for the scores will be empty.
+#' @param date The specified date for which you want to know the scores.
+#' @return A data frame with the home and away team names and their scores for that day.
 #' @export
 #' @examples
-#' scores("2014-11-11")
-#' scores("2015-01-01")
+#' scores("2014-11-19")
+#' scores("2013-10-01")
 #' scores(Sys.Date())
 scores <- function(date){
 	assertthat::assert_that(check_date(date))

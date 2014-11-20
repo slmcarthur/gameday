@@ -35,14 +35,13 @@ test_that("Vancouver Canucks can't have played on invalid dates", {
 	expect_error(gday(team = "canucks", date = "today"))
 })
 
-####### NEED TO CHANGE
-
-# Checking scores function
-test_that("Score function returns a data frame", {
-	expect_is(scores(Sys.Date()), "data.frame")
+# checking for scores error for invalid dates
+test_that("No scores available for invald dates", {
+	expect_error(scores("207-134-22"))
+	expect_error(scores("yesterday"))
 })
-# Check failure when date is invalid
-test_that("Can't check scores for invalid date", {
-	expect_error(scores("today"))
-	expect_error(scores("201-01-01"))
+
+# make sure the scores function is returning a data.frame
+test_that("scores returns a data frame", {
+	expect_is(scores(Sys.Date()), "data.frame")
 })

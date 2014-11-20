@@ -1,8 +1,9 @@
-#' My first R package: gameday
+#' gameday
 #'
-#' A one-liner summary of what this package is for.
+#' An RStudio interface for extracting NHL data from live.nhl.com
 #'
-#' Then we can add a larger paragraph that can span several lines
+#' This package allows users to determine whether or not their NHL team
+#' plays today or any other day of their choosing.
 #'
 #' @docType package
 #' @name gameday
