@@ -10,15 +10,19 @@
 #' Suffer no more! You can now ask R directly, without tempting yourself
 #' by firing up your web browser.
 #'
-#' @param team.name The name of your team
-#' @return Logical \code{TRUE} if \code{team.name} has a NHL game today,
+#' @param team The name of your team. Defaults to \code{Canucks}
+#' @return Logical \code{TRUE} if \code{team} has a NHL game today,
 #' \code{FALSE} otherwise
-#' @note case in \code{team.name} is ignored
+#' @note case in \code{team} is ignored
 #' @export
 #' @examples
 #' gday("canucks")
 #' gday("Bruins")
-gday <- function(team.name="canucks") {
-	url <- paste0("http://live.nhle.com/GameData/GCScoreboard/", Sys.Date(), ".jsonp")
-	grepl(team.name, getURL(url), ignore.case=TRUE)
+gday <- function(team = "canucks", date = Sys.Date()){
+	assertthat::assert_that(check_date(date))
+	if(internet_connection())
+		url <- paste0("http://live.nhle.com/GameData/GCScoreboard/", date, ".jsonp")
+	else
+		stop("Please check your internet connection.")
+	grepl(team, RCurl::getURL(url), ignore.case = TRUE)
 }
