@@ -31,3 +31,5 @@ To find the vignette associated with this package, you can look it up on the R c
 browseVignettes(package = "gameday")
 ```
 
+You can also find the vignette for this package [here](http://127.0.0.1:12575/library/gameday/doc/overview.html).
+
