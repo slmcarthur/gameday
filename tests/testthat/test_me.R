@@ -13,6 +13,11 @@ test_that("city and team name can both be used", {
 	expect_equal(gday("boston"), gday("bruins"))
 })
 
+# expect that default team returns Canucks
+test_that("default team is Canucks", {
+	expect_equal(gday("canucks"), gday())
+})
+
 # always expect logical return
 test_that("always returns logical", {
 	expect_is(gday("canucks"), "logical")

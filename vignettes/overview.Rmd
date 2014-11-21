@@ -44,15 +44,15 @@ We might also want to know the NHL scores from a certain day as well, using the 
 scores("2014-11-08")
 ```
 
-Another neat thing we can try to do with the `scores()` function is to rank the teams that won on a given day by how many goals they scored. We'll use the `dplyr` package to help out.
+We might want to know something else about the scores from that day. For instance, we can use the `scores()` function is display all the teams from 18 Nov 2014 that were playing at home and won. We will use syntax from the `dplyr` package to help us figure this out.
 
 ```{r}
 library(dplyr)
 
 scores <- scores("2014-11-08")
 scores %>%
-	mutate(winning = home_score - away_score) %>%
-	mutate(winner <- if(winning > 0) "home wins" else "away wins")
+	group_by(home) %>% filter(home_score > away_score) %>%
+	select(home)
 ```
 
 ### Conclusions
