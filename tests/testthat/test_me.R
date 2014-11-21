@@ -5,7 +5,7 @@ test_that("case is ignored", {
 
 # expect that baseball teams don't play hockey; Seattle has no hockey team
 test_that("Seattle Mariners are not a hockey team",{
-	expect_false(gday"mariners", gday"Seattle")
+	expect_false(gday("mariners"), gday("Seattle"))
 })
 
 # expect that use either city or team name to query

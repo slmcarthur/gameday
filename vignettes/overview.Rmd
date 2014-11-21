@@ -9,54 +9,60 @@ vignette: >
   %\usepackage[utf8]{inputenc}
 ---
 
-I did this! :)
+### Gameday Package
 
-Made some change
+This R package allows users to quickly and easily find out whether or not their favourite NHL team plays today, or any other day they may be interested in. It also allows users to view the final NHL scores of today or any day past. All this without ever needing to open a distracting web browser and all from the comfort of your R console.
 
-Vignettes are long form documentation commonly included in packages. Because they are part of the distribution of the package, they need to be as compact as possible. The `html_vignette` output type provides a custom style sheet (and tweaks some options) to ensure that the resulting html is as small as possible. The `html_vignette` format:
+### Usage
 
-- Never uses retina figures
-- Has a smaller default figure size
-- Uses a custom CSS stylesheet instead of the default Twitter Bootstrap style
+**gday(team, date)**
 
-## Vignette Info
+First we need to load the `gameday` package once installing it from github.
 
-Note the various macros within the `vignette` setion of the metadata block above. These are required in order to instruct R how to build the vignette. Note that you should change the `title` field and the `\VignetteIndexEntry` to match the title of your vignette.
-
-## Styles
-
-The `html_vignette` template includes a basic CSS theme. To override this theme you can specify your own CSS in the document metadata as follows:
-
-    output: 
-      rmarkdown::html_vignette:
-        css: mystyles.css
-
-## Figures
-
-The figure sizes have been customised so that you can easily put two images side-by-side. 
-
-```{r, fig.show='hold'}
-plot(1:10)
-plot(10:1)
+```{r}
+library("gameday")
 ```
 
-You can enable figure captions by `fig_caption: yes` in YAML:
+Then we can query whether or not our favourite NHL team played on a certain date, for example by using the `gday(team, date)` function.
 
-    output:
-      rmarkdown::html_vignette:
-        fig_caption: yes
+```{r}
+# did the Winnipeg Jets play on 08 Nov 2014?
+gday(team = "jets", date = "2014-11-08")
 
-Then you can use the chunk option `fig.cap = "Your figure caption."` in **knitr**.
+# do the Canucks play today? (note that the Canucks are the default team for this package)
+gday(date = Sys.Date())
 
-## More Examples
-
-You can write math expressions, e.g. $Y = X\beta + \epsilon$, footnotes^[A footnote here.], and tables, e.g. using `knitr::kable()`.
-
-```{r, echo=FALSE, results='asis'}
-knitr::kable(head(mtcars, 10))
+# will the Canadiens play tomorrow?
+gday(team = "montreal", Sys.Date() + 1)
 ```
 
-Also a quote using `>`:
+** scores(date)**
 
-> "He who gives up [code] safety for [code] speed deserves neither."
-([via](https://twitter.com/hadleywickham/status/504368538874703872))
+We might also want to know the NHL scores from a certain day as well, using the `scores(date)` function.
+
+```{r}
+scores("2014-11-08")
+```
+
+Another neat thing we can try to do with the `scores()` function is to rank the teams that won on a given day by how many goals they scored. We'll use the `dplyr` package to help out.
+
+```{r}
+library(dplyr)
+
+scores <- scores("2014-11-08")
+scores %>%
+	mutate(winning = home_score - away_score) %>%
+	mutate(winner <- if(winning > 0) "home wins" else "away wins")
+```
+
+### Conclusions
+
+**Credit Where Due**
+
+This week was very busy for me (away in Saskatoon for work), so I did not have much time or energy to dedicate to this assignment. I found a lot of inspiration for this assignment (ie. ideas about how to get going on the function code and writing a vignette) by looking at other students `gameday` repos, as well as the instructors links. But I found the most inspiration on [Derek Chiu's repo](https://github.com/dchiu911/gameday). Thank you Derek for the unintentional help and for having a great assignment built!
+
+
+**Final Thoughts**
+
+I found the workflow for building a package to be a bit tricky at first - it was difficult for me to remember to use `document()` and `build_vignette()` to get my documents out there before building and loading the newest version of the package. But after a while and a lot of back and forth, I think I've got the hang of it. I also managed to get by with only one Warning and 2 Notes after checking my package's compatibility with CRAN requirements, which is surprsing not bad! Overall, I wish I had more time this week to explore package building and try writing my own package with function I use frequently in my analyses. But, at the very least, now I know that I can build a package in the future for my own use, which is great to know. One excellent example of this idea is [Dean Attali's `RSalad` package](https://github.com/daattali/rsalad).
+

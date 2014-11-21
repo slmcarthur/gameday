@@ -25,3 +25,9 @@ scores(Sys.Date())
 scores("2014-11-01")
 ```
 
+To find the vignette associated with this package, you can look it up on the R command line like so:
+
+```
+browseVignettes(package = "gameday")
+```
+
