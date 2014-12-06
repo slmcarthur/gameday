@@ -5,7 +5,7 @@ How to install and load my package:
 
 ```
 library(devtools)
-install_github("slmcarthur/gameday")
+install_github("slmcarthur/gameday", build_vignettes = TRUE)
 library(gameday)
 ```
 
